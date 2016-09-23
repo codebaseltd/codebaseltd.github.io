@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Codebase Ltd.</title>
+  <meta charset="utf-8" />
+  <meta name="description" content="Software Engineering and Consulting Services" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/g/bootstrap@3.3.7(css/bootstrap.min.css),animatecss@3.5.2(animate.css),fontawesome@4.6.3" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/fontawesome/4.6.3/css/font-awesome.min.css" />
+
+  <style type="text/css">
+    #backgrounds, #backgrounds div, #backgrounds:after {
+      position : fixed;
+      top      : 0;
+      left     : 0;
+      right    : 0;
+      bottom   : 0;
+      background-size: cover;
+    }
+
+    #backgrounds {
+      background-color: black;
+    }
+
+    #backgrounds:after {
+      content: ' ';
+      background-color: rgba(0,0,0,0.5);
+      z-index: 1000;
+    }
+
+    #contact {
+      background-color: rgba(255,255,255,0.8);
+      width: 500px;
+      height: 250px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -125px;
+      margin-left: -250px;
+      padding: 2em;
+      border-radius: 3px;
+      border: 1px solid white;
+      text-align: center;
+      text-shadow: 0 1px 0 white;
+      font-size: 16px;
+      font-family: Open Sans, Helvetica, Verdana, sans-serif;
+    }
+
+  </style>
+</head>
+<body>
+  <div id="backgrounds">
+    <div></div>
+  </div>
+
+  <div id="contact">
+    <p>
+      <br />
+      <strong>Codebase Ltd.</strong><br />
+      E8 Orange Grove, Birbal Street<br />
+      Balzan BZN 9013<br />
+      Malta<br /><br />
+      Phone: +356 792 729 52<br />
+      VAT ID MT23595034<br />
+    </p>
+  </div>
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/g/jquery@3.1.0,lodash@4.15.0"></script>
+  <script type="text/javascript">
+  var images = [
+    "https://farm8.staticflickr.com/7407/10112199305_6c0cdfe721_k_d.jpg",
+    "https://farm9.staticflickr.com/8083/8297962048_c86370473f_k_d.jpg",
+    "https://farm4.staticflickr.com/3698/10427066765_6da4c63f15_z_d.jpg",
+    "https://farm4.staticflickr.com/3800/10562172626_6821155dd3_z_d.jpg",
+    "https://farm8.staticflickr.com/7052/8689244424_80ba95f33e_k_d.jpg",
+    "https://farm4.staticflickr.com/3940/14938033554_2520fec771_k_d.jpg",
+    "https://farm4.staticflickr.com/3407/5704125992_c571a2ba42_b_d.jpg"
+  ];
+
+  function newBackground() {
+    var newImage = new Image();
+    newImage.onload = function(){
+      $('<div>')
+        .css({
+          'background-image': 'url(' +  newImage.src + ')'
+        })
+        .addClass('animated fadeIn')
+        .appendTo('#backgrounds')
+        .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+          $(this).removeClass('animated fadeIn');
+        });
+
+      $('#backgrounds div:first')
+        .addClass('animated fadeOut')
+        .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+          $(this).remove()
+        });
+
+      setTimeout(newBackground, 5000 + Math.random() * 5000);
+    }
+
+    newImage.src = images[(Math.random() * images.length) | 0];
+    console.log(newImage.src);
+  }
+
+  newBackground();
+  </script>
+</body>
+</html>
